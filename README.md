@@ -1,6 +1,6 @@
 # Bonus.SourceGen
 
-// TODO: project stats
+[![CI](https://github.com/Bonuspunkt/Bonus.SourceGen/actions/workflows/ci-build.yml/badge.svg)](https://github.com/Bonuspunkt/Bonus.SourceGen/actions/workflows/ci-build.yml)
 
 see `stories` for design decisions
 
@@ -10,7 +10,7 @@ see `stories` for design decisions
 | `[RegisterDelegate]`                 | ☑ | ☑ | ☑ |
 | `.RegisterTypeWithDelegateModule<T>` | ☑* | ☑* | ☑ |
 
-* uses Reflection
+\* uses Reflection
 
 ### resources used / big thanks to
 - https://andrewlock.net/series/creating-a-source-generator/

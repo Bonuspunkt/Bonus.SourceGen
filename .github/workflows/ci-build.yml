@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.x.x'
+
+      - name: Install dependencies
+        run: dotnet restore ./src/Bonus.SourceGen.sln
+
+      - name: Build
+        run: dotnet build ./src/Bonus.SourceGen.sln --configuration Release --no-restore
+
+      - name: Test .net6.0
+        run: dotnet test ./src/Bonus.SourceGen.sln --configuration Release --no-build --framework net6.0 --verbosity normal
+
+      - name: Test .net7.0
+        run: dotnet test ./src/Bonus.SourceGen.sln --configuration Release --no-build --framework net7.0 --verbosity normal
