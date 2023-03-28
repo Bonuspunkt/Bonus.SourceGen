@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+        <RootNamespace>Bonus.SourceGen</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <AnalyzerLanguage>cs</AnalyzerLanguage>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- this is just QOL so we can use typeof(RegisterDelegateAttribute).FullName -->
+        <Compile Include="../Bonus.SourceGen/IRegisterADelegateModule.cs" Link="Bonus.SourceGen/IRegisterADelegateModule.cs"/>
+        <Compile Include="../Bonus.SourceGen/RegisterDelegateAttribute.cs" Link="Bonus.SourceGen/RegisterDelegateAttribute.cs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
+    </ItemGroup>
+
+</Project>

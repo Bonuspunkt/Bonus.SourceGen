@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG666,
+      Title: self reference in delegate,
+      Severity: Warning,
+      WarningLevel: 1,
+      Location: : (4,4)-(4,61),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: delegate parameter takes itself,
+      Message: delegate parameter takes itself,
+      Category: SourceGen
+    }
+  ]
+}

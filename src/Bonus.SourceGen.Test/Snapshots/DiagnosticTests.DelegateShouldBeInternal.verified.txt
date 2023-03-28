@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG667,
+      Title: delegate should be internal,
+      Severity: Warning,
+      WarningLevel: 1,
+      Location: : (3,4)-(3,32),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: when nested delegate should be internal,
+      Message: when nested delegate should be internal,
+      Category: SourceGen
+    }
+  ]
+}

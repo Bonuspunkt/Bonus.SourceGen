@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG001,
+      Title: class not partial,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: : (2,0)-(7,1),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: class {0} is not marked as partial,
+      Message: class {0} is not marked as partial,
+      Category: SourceGen
+    }
+  ]
+}

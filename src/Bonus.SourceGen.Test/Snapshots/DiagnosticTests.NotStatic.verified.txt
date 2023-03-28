@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG002,
+      Title: method not static,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: : (5,4)-(7,0),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: method {0} is not static,
+      Message: method {0} is not static,
+      Category: SourceGen
+    }
+  ]
+}
