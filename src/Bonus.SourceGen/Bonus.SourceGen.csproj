@@ -2,7 +2,9 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
 
-        <PackageDescription>TBD</PackageDescription>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,8 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bonus.SourceGen.Gen\Bonus.SourceGen.Gen.csproj"
-                          ReferenceOutputAssembly="false"
-                          PackAsAnalyzer="true" />
+        <ProjectReference Include="..\Bonus.SourceGen.Gen\Bonus.SourceGen.Gen.csproj" ReferenceOutputAssembly="false" PackAsAnalyzer="true" />
     </ItemGroup>
 </Project>

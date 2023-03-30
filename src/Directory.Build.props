@@ -11,7 +11,18 @@
 
         <Authors>Bonuspunkt</Authors>
         <Company></Company>
+        <PackageDescription>TBD</PackageDescription>
+        <PackageProjectUrl>https://github.com/Bonuspunkt/Bonus.SourceGen</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Bonuspunkt/Bonus.SourceGen</RepositoryUrl>
+
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <Sdk Name="ViHo.PackAsAnalyzer" Version="1.0.1" />
+    <Sdk Name="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" />
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+    </ItemGroup>
 </Project>
