@@ -1,24 +1,29 @@
-name: CI
+name: Build
 
 on:
   push:
     branches:
-    - master
+      - master
+
   pull_request:
     branches:
       - master
 
 jobs:
-  build:
+  linux_build:
+    name: Linux Build
     runs-on: ubuntu-latest
-    name: Build
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v3
+
+      - uses: actions/cache@v3
         with:
-          dotnet-version: '7.x.x'
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
 
       - name: Install dependencies
         run: dotnet restore ./src/Bonus.SourceGen.sln
@@ -31,3 +36,28 @@ jobs:
 
       - name: Test .net7.0
         run: dotnet test ./src/Bonus.SourceGen.sln --configuration Release --no-build --framework net7.0 --verbosity normal
+
+  windows_build:
+    name: Windows Build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-dotnet@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Install dependencies
+        run: dotnet restore ./src/Bonus.SourceGen.sln
+
+      - name: Build
+        run: dotnet build ./src/Bonus.SourceGen.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test ./src/Bonus.SourceGen.sln --configuration Release --no-build --verbosity normal
+
