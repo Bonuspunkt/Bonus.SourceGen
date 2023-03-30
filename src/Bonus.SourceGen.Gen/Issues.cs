@@ -75,6 +75,18 @@ static class Issues {
         return Diagnostic.Create(_mustBeHistogramDouble, argument.GetLocation());
     }
 
+    private static readonly DiagnosticDescriptor _mustBeActivitySource = new(
+        id: "BSG200",
+        title: "requires ActivitySource",
+        messageFormat: "does not resolve to ActivitySource",
+        category: "SourceGen",
+        defaultSeverity: DiagnosticSeverity.Error,
+        isEnabledByDefault: true
+    );
+    public static Diagnostic MustBeActivitySource(AttributeArgumentSyntax argument) {
+        return Diagnostic.Create(_mustBeActivitySource, argument.GetLocation());
+    }
+
     // v-- warning
     private static readonly DiagnosticDescriptor _selfAsDelegateParameter = new(
         id: "BSG666",

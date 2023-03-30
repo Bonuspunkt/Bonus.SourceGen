@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG200,
+      Title: requires ActivitySource,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: : (8,17)-(8,40),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: does not resolve to ActivitySource,
+      Message: does not resolve to ActivitySource,
+      Category: SourceGen
+    }
+  ]
+}

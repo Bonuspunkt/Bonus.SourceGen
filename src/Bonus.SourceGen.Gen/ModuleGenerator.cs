@@ -4,7 +4,8 @@ namespace Bonus.SourceGen;
 public class ModuleGenerator : IIncrementalGenerator {
     private static readonly ImmutableHashSet<string> _attributeNames = new[] {
         RegisterDelegateGenerator.Attribute,
-        UseHistogramGenerator.Attribute
+        UseHistogramGenerator.Attribute,
+        UseActivityGenerator.Attribute
     }.ToImmutableHashSet();
 
     public void Initialize(IncrementalGeneratorInitializationContext context) {
@@ -65,7 +66,8 @@ public class ModuleGenerator : IIncrementalGenerator {
         IEnumerable<IGrouping<SyntaxNode?, MethodDeclarationSyntax>> groups) {
         var mappings = new Dictionary<string, GenerateSourceCodeFactory> {
                 { RegisterDelegateGenerator.Attribute, RegisterDelegateGenerator.Create },
-                { UseHistogramGenerator.Attribute, UseHistogramGenerator.Create }
+                { UseHistogramGenerator.Attribute, UseHistogramGenerator.Create },
+                { UseActivityGenerator.Attribute, UseActivityGenerator.Create },
             }
             .ToImmutableDictionary(
                 keyValue => compilation.GetTypeByMetadataName(keyValue.Key),
