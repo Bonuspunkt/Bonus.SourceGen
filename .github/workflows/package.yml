@@ -1,0 +1,36 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  publish:
+    if: ${{ github.ref_type == 'tag' && startsWith(github.ref_name, 'v') }}
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-dotnet@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Install dependencies
+        run: dotnet restore ./src/Bonus.SourceGen.sln
+
+      - name: Patch Version
+        shell: pwsh
+        run: ./build/patchVersion.ps1
+
+      - name: Pack
+        run: dotnet pack ./src/Bonus.SourceGen.sln --configuration Release
+
+      - name: Publish
+        run: dotnet nuget push **/*.nupkg --source https://nuget.pkg.github.com/bonuspunkt/index.json --api-key ${{ secrets.GH_PACKAGE_PAT }}
