@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG100,
+      Title: use nameof(),
+      Severity: Error,
+      WarningLevel: 0,
+      Location: : (8,18)-(8,30),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: use nameof(),
+      Message: use nameof(),
+      Category: SourceGen
+    }
+  ]
+}

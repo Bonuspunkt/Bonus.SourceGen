@@ -9,7 +9,7 @@
       Description: ,
       HelpLink: ,
       MessageFormat: method {0} is not static,
-      Message: method {0} is not static,
+      Message: method _ is not static,
       Category: SourceGen
     }
   ]

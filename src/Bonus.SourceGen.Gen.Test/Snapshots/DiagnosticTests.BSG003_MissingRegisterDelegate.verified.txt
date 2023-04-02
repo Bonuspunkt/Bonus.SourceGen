@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG003,
+      Title: method missing RegisterDelegate,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: : (7,4)-(9,0),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: method {0} is missing RegisterDelegate attribute,
+      Message: method _ is missing RegisterDelegate attribute,
+      Category: SourceGen
+    }
+  ]
+}

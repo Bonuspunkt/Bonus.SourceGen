@@ -63,10 +63,6 @@ public class ModuleGenerator : IIncrementalGenerator {
         IEnumerable<IGrouping<SyntaxNode?, MethodDeclarationSyntax>> groups) {
 
         var registerDelegate = compilation.GetTypeByMetadataName(_registerDelegate);
-        if (registerDelegate == null) {
-            context.ReportDiagnostic(Issues.RegisterDelegateNotFound());
-            return Array.Empty<ModuleInfo>();
-        }
 
         var result = new List<ModuleInfo>();
 
@@ -79,7 +75,7 @@ public class ModuleGenerator : IIncrementalGenerator {
             }
 
             if (!classDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PartialKeyword))) {
-                context.ReportDiagnostic(Issues.ClassNotPartial(classDeclaration));
+                context.ReportDiagnostic(Issues.TypeNotPartial(classDeclaration));
                 continue;
             }
 
@@ -99,11 +95,6 @@ public class ModuleGenerator : IIncrementalGenerator {
                     continue;
                 }
 
-                if (!attributeSymbols.Contains(registerDelegate)) {
-                    context.ReportDiagnostic(Issues.MissingRegisterDelegate(method));
-                    continue;
-                }
-
                 if (semanticModel.GetSymbolInfo(method.ReturnType).Symbol is not INamedTypeSymbol delegateSymbol) {
                     // !!!!!
                     continue;
@@ -111,7 +102,7 @@ public class ModuleGenerator : IIncrementalGenerator {
 
                 if (delegateSymbol.TypeKind != TypeKind.Delegate ||
                     delegateSymbol.DelegateInvokeMethod == null) {
-                    context.ReportDiagnostic(Issues.DoesNotReturnDelegate(method));
+                    context.ReportDiagnostic(Issues.DoesNotReturnDelegate(method.ReturnType));
                     continue;
                 }
 
@@ -145,9 +136,6 @@ public class ModuleGenerator : IIncrementalGenerator {
             }
 
             var classes = classDeclaration.AncestorsAndSelf().OfType<ClassDeclarationSyntax>().Reverse().ToImmutableArray();
-            if (classes.Length > 1) {
-                context.ReportDiagnostic(Issues.NestedClasses(classes[^1]));
-            }
 
             result.Add(new ModuleInfo {
                 Classes = classes,

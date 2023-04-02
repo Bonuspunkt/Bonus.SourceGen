@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG101,
+      Title: requires Histogram<double>,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: : (8,18)-(8,36),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: does not resolve to Histogram<double>,
+      Message: does not resolve to Histogram<double>,
+      Category: SourceGen
+    }
+  ]
+}

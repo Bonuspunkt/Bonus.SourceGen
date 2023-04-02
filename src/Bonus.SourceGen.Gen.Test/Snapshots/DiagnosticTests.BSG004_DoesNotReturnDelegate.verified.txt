@@ -1,0 +1,16 @@
+﻿{
+  Diagnostics: [
+    {
+      Id: BSG004,
+      Title: method does not return a delegate,
+      Severity: Error,
+      WarningLevel: 0,
+      Location: : (4,20)-(4,23),
+      Description: ,
+      HelpLink: ,
+      MessageFormat: that is not a delegate,
+      Message: that is not a delegate,
+      Category: SourceGen
+    }
+  ]
+}
