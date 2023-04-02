@@ -8,6 +8,7 @@ see `stories` for design decisions
 |                                      | net48 | net6 | net7 |
 |--------------------------------------|---|---|---|
 | `[RegisterDelegate]`                 | ☑ | ☑ | ☑ |
+| `[UseHistogram(nameof(...))]`        | ☑ | ☑ | ☑ |
 | `.RegisterTypeWithDelegateModule<T>` | ☑* | ☑* | ☑ |
 
 \* uses Reflection

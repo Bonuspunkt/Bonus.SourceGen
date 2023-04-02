@@ -41,6 +41,27 @@ public partial class NotStatic {
     }
 
     [Fact]
+    public Task BSG003_MissingRegisterDelegate() {
+        var source = """
+using System.Diagnostics.Metrics;
+using Bonus.SourceGen;
+
+public partial class Class {
+    internal Histogram<double> _histogram = null;
+    internal delegate void Void();
+
+    [UseHistogram(nameof(_histogram)]
+    internal static Void _() => () => {}
+}
+""";
+        return TestHelper.Compile(source).Validate(data => {
+            data.Diagnostics.Should().SatisfyRespectively(diagnostic => { diagnostic.Id.Should().Be("BSG003"); });
+
+            return Task.CompletedTask;
+        }, Check.Snapshots);
+    }
+
+    [Fact]
     public Task BSG004_DoesNotReturnDelegate() {
         var source = """
 using Bonus.SourceGen;
@@ -52,6 +73,50 @@ public partial class Class {
 """;
         return TestHelper.Compile(source).Validate(data => {
             data.Diagnostics.Should().SatisfyRespectively(diagnostic => { diagnostic.Id.Should().Be("BSG004"); });
+
+            return Task.CompletedTask;
+        }, Check.Snapshots);
+    }
+
+    [Fact]
+    public Task BSG100_UseNameOfExpression() {
+        var source = """
+using System.Diagnostics.Metrics;
+using Bonus.SourceGen;
+
+public partial class Class {
+    internal Histogram<double> _histogram = null;
+    internal delegate void Void();
+
+    [RegisterDelegate]
+    [UseHistogram("_histogram"]
+    internal static Void _() => () => {}
+}
+""";
+        return TestHelper.Compile(source).Validate(data => {
+            data.Diagnostics.Should().SatisfyRespectively(diagnostic => { diagnostic.Id.Should().Be("BSG100"); });
+
+            return Task.CompletedTask;
+        }, Check.Snapshots);
+    }
+
+    [Fact]
+    public Task BSG101_MustBeHistogramDouble() {
+        var source = """
+using System.Diagnostics.Metrics;
+using Bonus.SourceGen;
+
+public partial class Class {
+    internal Histogram<long> _histogram = null;
+    internal delegate void Void();
+
+    [RegisterDelegate]
+    [UseHistogram(nameof(_histogram)]
+    internal static Void _() => () => {}
+}
+""";
+        return TestHelper.Compile(source).Validate(data => {
+            data.Diagnostics.Should().SatisfyRespectively(diagnostic => { diagnostic.Id.Should().Be("BSG101"); });
 
             return Task.CompletedTask;
         }, Check.Snapshots);

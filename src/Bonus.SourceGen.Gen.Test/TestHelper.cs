@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Bonus.SourceGen;
 
 internal static class TestHelper {
@@ -9,9 +11,16 @@ internal static class TestHelper {
             .Where(assembly => !assembly.IsDynamic && !string.IsNullOrWhiteSpace(assembly.Location))
             .Select(assembly => MetadataReference.CreateFromFile(assembly.Location))
             .ToList();
-        references.Add(MetadataReference.CreateFromFile(typeof(Autofac.Module).Assembly.Location));
-        references.Add(MetadataReference.CreateFromFile(typeof(System.Threading.Tasks.Task).Assembly.Location));
-        references.Add(MetadataReference.CreateFromFile(typeof(RegisterDelegateAttribute).Assembly.Location));
+
+        var locations = new[] {
+                typeof(Autofac.Module),
+                typeof(System.Diagnostics.Metrics.Meter),
+                typeof(System.Threading.Tasks.Task),
+                typeof(RegisterDelegateAttribute)
+            }
+            .Select(type => type.Assembly.Location)
+            .Select(location => MetadataReference.CreateFromFile(location));
+        references.AddRange(locations);
 
         var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
 
@@ -56,6 +65,11 @@ internal static class Check {
         var result = data.Compilation.Emit(stream);
 
         var filteredDiagnostics = result.Diagnostics
+#if NET48
+            .Where(diagnostic => !(
+                diagnostic.Id == "CS1702" &&
+                diagnostic.GetMessage(CultureInfo.InvariantCulture).Contains("DiagnosticSource")))
+#endif
             .Where(diagnostic => diagnostic.Severity != DiagnosticSeverity.Hidden);
 
         using (new AssertionScope()) {

@@ -27,6 +27,18 @@ static class Issues {
         return Diagnostic.Create(_notStatic, methodDeclaration.GetLocation(), methodDeclaration.Identifier);
     }
 
+    private static readonly DiagnosticDescriptor _missingRegisterDelegate = new(
+        id: "BSG003",
+        title: "method missing RegisterDelegate",
+        messageFormat: "method {0} is missing RegisterDelegate attribute",
+        category: "SourceGen",
+        defaultSeverity: DiagnosticSeverity.Error,
+        isEnabledByDefault: true
+    );
+    public static Diagnostic MissingRegisterDelegate(MethodDeclarationSyntax methodDeclaration) {
+        return Diagnostic.Create(_missingRegisterDelegate, methodDeclaration.GetLocation(), methodDeclaration.Identifier);
+    }
+
     private static readonly DiagnosticDescriptor _doesNotReturnDelegate = new(
         id: "BSG004",
         title: "method does not return a delegate",
@@ -37,6 +49,30 @@ static class Issues {
     );
     public static Diagnostic DoesNotReturnDelegate(TypeSyntax typeSyntax) {
         return Diagnostic.Create(_doesNotReturnDelegate, typeSyntax.GetLocation());
+    }
+
+    private static readonly DiagnosticDescriptor _useNameOfExpression = new(
+        id: "BSG100",
+        title: "use nameof()",
+        messageFormat: "use nameof()",
+        category: "SourceGen",
+        defaultSeverity: DiagnosticSeverity.Error,
+        isEnabledByDefault: true
+    );
+    public static Diagnostic UseNameOfExpression(AttributeArgumentSyntax argument) {
+        return Diagnostic.Create(_useNameOfExpression, argument.GetLocation());
+    }
+
+    private static readonly DiagnosticDescriptor _mustBeHistogramDouble = new(
+        id: "BSG101",
+        title: "requires Histogram<double>",
+        messageFormat: "does not resolve to Histogram<double>",
+        category: "SourceGen",
+        defaultSeverity: DiagnosticSeverity.Error,
+        isEnabledByDefault: true
+    );
+    public static Diagnostic MustBeHistogramDouble(AttributeArgumentSyntax argument) {
+        return Diagnostic.Create(_mustBeHistogramDouble, argument.GetLocation());
     }
 
     // v-- warning
