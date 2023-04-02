@@ -9,6 +9,7 @@ see `stories` for design decisions
 |--------------------------------------|---|---|---|
 | `[RegisterDelegate]`                 | ☑ | ☑ | ☑ |
 | `[UseHistogram(nameof(...))]`        | ☑ | ☑ | ☑ |
+| `[UseActivity(nameof(...))]`         | ☑ | ☑ | ☑ |
 | `.RegisterTypeWithDelegateModule<T>` | ☑* | ☑* | ☑ |
 
 \* uses Reflection
