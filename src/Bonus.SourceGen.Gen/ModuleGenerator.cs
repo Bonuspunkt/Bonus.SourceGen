@@ -3,7 +3,7 @@ namespace Bonus.SourceGen;
 [Generator]
 public class ModuleGenerator : IIncrementalGenerator {
 
-    private static readonly string _registerDelegate = typeof(RegisterDelegateAttribute).FullName;
+    private static readonly string _registerDelegate = "Bonus.SourceGen.RegisterDelegateAttribute";
 
     public void Initialize(IncrementalGeneratorInitializationContext context) {
 

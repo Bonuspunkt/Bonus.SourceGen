@@ -30,6 +30,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Bonus.SourceGen.Gen\Bonus.SourceGen.Gen.csproj" />
+        <ProjectReference Include="..\Bonus.SourceGen\Bonus.SourceGen.csproj" />
     </ItemGroup>
 
     <ItemGroup>
