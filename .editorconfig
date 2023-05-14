@@ -14,13 +14,18 @@ charset = utf-8
 [*.yml]
 indent_size = 2
 
-[*.cs]
-tab_width = 4
+[**/EnableCSharp11/*]
+generated_code = true
+dotnet_diagnostic.CS8669.severity = none
+[IndentedStringBuilder.cs]
+generated_code = true
+dotnet_diagnostic.CS8669.severity = none
 
-csharp_using_directive_placement = outside_namespace:silent
+[*.cs]
+csharp_using_directive_placement = outside_namespace:warning
 csharp_prefer_simple_using_statement = true:suggestion
-csharp_prefer_braces = true:silent
-csharp_style_namespace_declarations = block_scoped:silent
+csharp_prefer_braces = when_multiline:silent
+csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_prefer_top_level_statements = true:silent
 csharp_style_expression_bodied_methods = false:silent
