@@ -1,9 +1,9 @@
-namespace Bonus.SourceGen
-{
-    public class CombinedTests : UsesVerifyBaseClass {
-        [Fact]
-        public Task UseAllAttributes() {
-            var source = """
+namespace Bonus.SourceGen;
+
+public class CombinedTests : UsesVerifyBaseClass {
+    [Fact]
+    public Task UseAllAttributes() {
+        var source = """
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using Bonus.SourceGen;
@@ -23,8 +23,7 @@ partial class X {
     }
 }
 """;
-            return TestHelper.Compile(source).Validate(Check.Validators);
-        }
-
+        return TestHelper.Compile(source).Validate(Check.Validators);
     }
+
 }

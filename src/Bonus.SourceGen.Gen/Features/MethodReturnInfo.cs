@@ -1,22 +1,21 @@
-namespace Bonus.SourceGen
-{
-    internal record MethodReturnInfo {
-        public static MethodReturnInfo Create(ITypeSymbol typeSymbol, Compilation compilation) {
-            var voidSymbol = compilation.GetTypeByMetadataName(typeof(void).FullName);
-            var taskSymbol = compilation.GetTypeByMetadataName(typeof(Task).FullName);
+namespace Bonus.SourceGen;
 
-            Func<ISymbol?, ISymbol?, bool> equals = SymbolEqualityComparer.Default.Equals;
-            if (equals(voidSymbol, typeSymbol))
-                return new MethodReturnInfo { Async = null, Return = null };
-            if (equals(taskSymbol, typeSymbol))
-                return new MethodReturnInfo { Async = "async ", Return = "await " };
-            if (equals(taskSymbol, typeSymbol.BaseType))
-                return new MethodReturnInfo { Async = "async ", Return = "return await " };
+internal record MethodReturnInfo {
+    public static MethodReturnInfo Create(ITypeSymbol typeSymbol, Compilation compilation) {
+        var voidSymbol = compilation.GetTypeByMetadataName(typeof(void).FullName);
+        var taskSymbol = compilation.GetTypeByMetadataName(typeof(Task).FullName);
 
-            return new MethodReturnInfo { Async = null, Return = "return " };
-        }
+        Func<ISymbol?, ISymbol?, bool> equals = SymbolEqualityComparer.Default.Equals;
+        if (equals(voidSymbol, typeSymbol))
+            return new MethodReturnInfo { Async = null, Return = null };
+        if (equals(taskSymbol, typeSymbol))
+            return new MethodReturnInfo { Async = "async ", Return = "await " };
+        if (equals(taskSymbol, typeSymbol.BaseType))
+            return new MethodReturnInfo { Async = "async ", Return = "return await " };
 
-        public required string? Async { get; init; }
-        public required string? Return { get; init; }
+        return new MethodReturnInfo { Async = null, Return = "return " };
     }
+
+    public required string? Async { get; init; }
+    public required string? Return { get; init; }
 }

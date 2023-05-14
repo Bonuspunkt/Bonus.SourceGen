@@ -2,7 +2,7 @@ using System.Diagnostics.Metrics;
 using Autofac;
 using FluentAssertions;
 
-namespace Bonus.SourceGen.Integration; 
+namespace Bonus.SourceGen.Integration;
 
 public class Collector<T> : IDisposable where T : struct {
     public static Collector<T> Create(Instrument<T> instrument) {
@@ -28,8 +28,7 @@ public class Collector<T> : IDisposable where T : struct {
 
     public IEnumerable<T> Values => _values;
 
-    public void Dispose()
-    {
+    public void Dispose() {
         _listener.Dispose();
     }
 }
@@ -37,7 +36,7 @@ public class Collector<T> : IDisposable where T : struct {
 public static class Metrics {
     private static readonly Meter _meter = new("MyMeter");
 
-    public static Histogram<double> MyHistogram { get; } = _meter.CreateHistogram<double>("MyHistogram", unit:"ns");
+    public static Histogram<double> MyHistogram { get; } = _meter.CreateHistogram<double>("MyHistogram", unit: "ns");
 }
 
 public partial class UseHistogramTests {

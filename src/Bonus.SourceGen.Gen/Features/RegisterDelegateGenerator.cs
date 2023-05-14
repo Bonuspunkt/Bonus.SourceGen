@@ -1,6 +1,6 @@
-namespace Bonus.SourceGen; 
+namespace Bonus.SourceGen;
 
-internal class RegisterDelegateGenerator: IGenerateSourceCode {
+internal class RegisterDelegateGenerator : IGenerateSourceCode {
     public static string Attribute => "Bonus.SourceGen.RegisterDelegateAttribute";
     public static RegisterDelegateGenerator? Create(GenerateSourceContext context) {
 

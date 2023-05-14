@@ -54,8 +54,8 @@ public partial class UseActivityTests {
 
         var listener = new ActivityListener();
         listener.ShouldListenTo = _ => true;
-        listener.ActivityStarted = activity => logs.Add(new Log(Action.Start,activity));
-        listener.ActivityStopped = activity => logs.Add(new Log(Action.Stop,activity));
+        listener.ActivityStarted = activity => logs.Add(new Log(Action.Start, activity));
+        listener.ActivityStopped = activity => logs.Add(new Log(Action.Stop, activity));
         listener.Sample = (ref ActivityCreationOptions<ActivityContext> _) =>
             ActivitySamplingResult.AllDataAndRecorded;
         ActivitySource.AddActivityListener(listener);

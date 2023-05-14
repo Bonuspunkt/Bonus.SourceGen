@@ -1,4 +1,4 @@
-namespace Bonus.SourceGen; 
+namespace Bonus.SourceGen;
 
 public class UseActivityTests : UsesVerifyBaseClass {
     [Fact]
